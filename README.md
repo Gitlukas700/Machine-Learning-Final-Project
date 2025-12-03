@@ -23,3 +23,7 @@ Step 4:
     Clicking the button "generate new team" well create a new team through the use
     of a genetic algorithm. Along with a plot of the fitness through
     each generation.
+
+Notes:
+    The graph is displayed by saving a plot as a png then giving a command to open it
+    This was a needed work around since just displaying the plot did not work at all.

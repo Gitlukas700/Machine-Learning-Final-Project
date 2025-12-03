@@ -8,7 +8,7 @@ dataset = pd.read_excel('league_data.xlsx')
 dataset_filtered = dataset[['champion_name','win']]
 
 
-#NO OP
+#NO OP used to stop the plot from popping up in a window
 import matplotlib.pyplot as pp
 def nop():
     pass
@@ -52,11 +52,11 @@ def gen_team():
         random_seed=None
     )
     ga_inst.run()
-   
+   #Saving the fitness plot
     ga_inst.plot_fitness(
         save_dir= "fitness.png"
     )
-    
+    #The command to open the plot
     sp.run(["cmd", "/c", "start fitness.png"])
 
     best_solution = ga_inst.best_solution()
