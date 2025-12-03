@@ -1,0 +1,7 @@
+<table style="border: 5px solid black;">
+<tr><th>Team</th></tr>
+{% for c in team %}
+    <tr><td>{{c}}</td></tr>
+{% endfor %}
+</table>
+<button onclick="location.reload()">Generate New Team</button>
