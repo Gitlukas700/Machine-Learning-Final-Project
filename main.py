@@ -3,8 +3,16 @@ import numpy as np
 import sklearn as skit
 import pygad as evo
 import flask as fk
+import subprocess as sp
 dataset = pd.read_excel('league_data.xlsx')
 dataset_filtered = dataset[['champion_name','win']]
+
+
+#NO OP
+import matplotlib.pyplot as pp
+def nop():
+    pass
+pp.show = nop
 
 #These allow for the average win rates to be got for each character in the game
 dataset_filtered["loss"] = dataset_filtered["win"].map(lambda x: not x)
@@ -44,13 +52,20 @@ def gen_team():
         random_seed=None
     )
     ga_inst.run()
-    ga_inst.plot_fitness(ga_inst)
+   
+    ga_inst.plot_fitness(
+        save_dir= "fitness.png"
+    )
     
+    sp.run(["cmd", "/c", "start fitness.png"])
+
     best_solution = ga_inst.best_solution()
     print(best_solution)
     winners = best_solution[0]
     winrate = best_solution[1]
     return list(rates.index[int(champion)] for champion in winners)
+
+
 
 #front end flask implemntation 
 app = fk.Flask(__name__)
@@ -58,4 +73,5 @@ app = fk.Flask(__name__)
 @app.route("/")
 def main():
     team = gen_team()
+    
     return fk.render_template("app.html",team=team)
